@@ -1,0 +1,53 @@
+.container {
+  z-index: 5;
+  position: absolute;
+
+  top: 190px;
+  left: 250px;
+}
+
+.input {
+  width: 638px;
+  height: 54px;
+  padding: 16px;
+  border-radius: 8px;
+  border: none;
+
+  font-size: 16px;
+
+  align-items: center;
+  justify-content: center;
+
+  color: var(--gray-300);
+  background-color: var(--gray-500);
+}
+
+.button {
+  width: 90px;
+  height: 54px;
+  margin: 8px;
+
+  background-color: var(--blueDark);
+  border-radius: 8px;
+  border: none;
+}
+
+.button a {
+  font-size: 14px;
+  font-weight:  bold;
+  color: var(--gray-100);
+
+  display: block;
+  text-decoration: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 0.5rem;
+}
+
+
+.button:hover {
+  background-color: var(--blue);
+}
