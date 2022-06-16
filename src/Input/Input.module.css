@@ -27,30 +27,34 @@
 .button {
   width: 90px;
   height: 54px;
-
-  margin-left: 20px;
-
-  background-color: var(--blueDark);
+  margin: 15px;
+   
+  font-weight:  bold;
+  font-size: 1rem;
   border-radius: 8px;
   border: none;  
-}
+  cursor: pointer;
 
-.button a {
-  font-size: 1rem;
-
-  font-weight:  bold;
-  color: var(--gray-100);
-
-  display: block;
-  text-decoration: none;
-
-  display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  text-align: center;
 
-  gap: 0.5rem;
+  background-color: var(--blueDark);
+  color: var(--gray-100);
 }
 
 .button:hover {
   background-color: var(--blue);
 }
+
+.descripion {
+  width: 745px;
+  margin-top: 64px;
+  
+  justify-content: space-between;
+  align-items: center;
+
+  flex-wrap: wrap;
+  display:inline-flex;
+}
+

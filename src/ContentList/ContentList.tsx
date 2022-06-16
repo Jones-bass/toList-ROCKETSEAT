@@ -1,60 +1,22 @@
+import { Trash } from "phosphor-react";
+import styles from "./ContentList.module.css";
 
-import { Trash } from 'phosphor-react';
-import styles from './ContentList.module.css';
-
-export function ContentList() {
+interface ContentProps {
+  text: string;
+}
+export function ContentList({ text }: ContentProps) {
   return (
     <div className={styles.content}>
-      <div className={styles.descripion}>
-        <p>Tarefas criadas</p>
-        <p>Concluídas</p>
-      </div>
-
       <div className={styles.section}>
         <label>
-          <input
-            type="radio"
-          />
+          <input type="radio" />
         </label>
-        <p> Integer urna interdum massa libero auctor neque turpis turpis semper.
-          Duis vel sed fames int juns Duis. </p>
+        <div className={styles.text}>{text}</div>
 
-        <button title="Deletar">
+        <button>
           <Trash size={20} />
         </button>
       </div>
-
-      <div className={styles.section}>
-        <label>
-          <input
-            type="radio"
-          />
-        </label>
-        <p> Integer urna interdum massa libero auctor neque turpis turpis semper.
-          Duis vel sed fames int juns Duis. </p>
-
-        <button title="Deletar">
-          <Trash size={20} />
-        </button>
-      </div>
-
-
-      <div className={styles.section}>
-        <label>
-          <input
-            type="radio"
-          />
-        </label>
-        <p> Integer urna interdum massa libero auctor neque turpis turpis semper.
-          Duis vel sed fames int juns Duis. </p>
-
-        <button title="Deletar">
-          <Trash size={20} />
-        </button>
-      </div>
-
-
-      
     </div>
-  )
+  );
 }
