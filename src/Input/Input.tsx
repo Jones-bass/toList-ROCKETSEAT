@@ -1,4 +1,5 @@
 import { PlusCircle } from 'phosphor-react';
+import { ContentList } from '../ContentList/ContentList';
 
 import styles from './Input.module.css';
 
@@ -14,6 +15,7 @@ export function Input() {
         <PlusCircle size={20}/>
         </a>
         </button>
+        <ContentList/>
     </div>
   )
 }

@@ -1,6 +1,7 @@
 
 import { Input } from './Input/Input';
 import { Header } from './Header/Header';
+
 import './global.css';
 
 
@@ -10,6 +11,7 @@ export function App() {
     <div>
       <Header/>
       <Input />
+ 
     </div>
   )
 }

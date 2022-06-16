@@ -1,22 +1,24 @@
 .container {
-  z-index: 5;
+  width: 100%;
   position: absolute;
 
-  top: 190px;
-  left: 250px;
+  top: 10rem;
+
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-wrap: wrap;
+  display: inline-block;
 }
 
 .input {
-  width: 638px;
   height: 54px;
-  padding: 16px;
+  width: 638px;
+  padding: 0 1.4rem;
+  height: 3.85rem;
   border-radius: 8px;
   border: none;
-
-  font-size: 16px;
-
-  align-items: center;
-  justify-content: center;
+  font-size: 1.14rem;
 
   color: var(--gray-300);
   background-color: var(--gray-500);
@@ -25,15 +27,17 @@
 .button {
   width: 90px;
   height: 54px;
-  margin: 8px;
+
+  margin-left: 20px;
 
   background-color: var(--blueDark);
   border-radius: 8px;
-  border: none;
+  border: none;  
 }
 
 .button a {
-  font-size: 14px;
+  font-size: 1rem;
+
   font-weight:  bold;
   color: var(--gray-100);
 
@@ -46,7 +50,6 @@
 
   gap: 0.5rem;
 }
-
 
 .button:hover {
   background-color: var(--blue);

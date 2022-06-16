@@ -1,0 +1,52 @@
+
+.content{
+  width: 745px;
+  height: 287px;
+
+  border-radius: 8px;
+
+  margin-top: 1rem;
+
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex-wrap: wrap;
+  display: inline-block;
+}
+
+.descripion {
+  margin: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section {
+  display: flex;
+
+  font-size: 14px;
+  width: 745px;
+  height: 72px;
+
+  padding: 16px;
+  justify-content: space-between;
+  align-items: center;
+
+  border-radius: 8px;
+
+  margin-top: 20px;
+
+  background-color: var(--gray-500);
+}
+
+.section > p {
+  padding: 12px;
+  text-align: left;
+}
+
+.section > button {
+  background-color: transparent;
+  border: none;
+  color: var(--gray-300);
+  cursor: pointer;
+}
