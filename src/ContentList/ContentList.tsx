@@ -2,18 +2,25 @@ import { Trash } from "phosphor-react";
 import styles from "./ContentList.module.css";
 
 interface ContentProps {
-  text: string;
+  textList: string;
+  onDeleteComments: (comment: string)  => void
 }
-export function ContentList({ text }: ContentProps) {
+
+export function ContentList({ textList, onDeleteComments}: ContentProps) {
+ 
+  function handleDeleteList() {
+    onDeleteComments(textList)
+  }
+
   return (
     <div className={styles.content}>
       <div className={styles.section}>
         <label>
           <input type="radio" />
         </label>
-        <div className={styles.text}>{text}</div>
+        <div className={styles.text}>{textList}</div>
 
-        <button>
+        <button onClick={handleDeleteList} title="Deletar lista">
           <Trash size={20} />
         </button>
       </div>
