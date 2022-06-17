@@ -5,6 +5,8 @@ import { ContentList } from "../ContentList/ContentList";
 import styles from "./Input.module.css";
 
 export function Input() {
+  const [count, setCount] = useState(1);
+
   const [commentList, setComemmtList] = useState(
     ['Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.']
   );
@@ -23,11 +25,19 @@ export function Input() {
   }
 
   function deleteList(toDeleteList: string) {
-    const commentWithonnDeletedOne = commentList.filter(comment => {
+    const deleteOnComment = commentList.filter(comment => {
       return comment !== toDeleteList;
     })
 
-    setComemmtList(commentWithonnDeletedOne)
+    setComemmtList(deleteOnComment)
+  }
+
+  function decrementList() {
+    setCount(count - 1)
+  }
+
+  function incrementList() {
+    setCount(count + 1)
   }
 
 
@@ -40,19 +50,23 @@ export function Input() {
         onChange={handleNewCommentsChange}
       />
 
-      <button type="submit" className={styles.button}>
+      <button type="submit" className={styles.button}
+        onClick={incrementList}
+      >
+
         Criar  {" "}
         <PlusCircle style={{ fontSize: '1.4rem', marginBottom: '-0.3rem' }} />
       </button>
 
       <div className={styles.descripion}>
-        <p>Tarefas criadas</p>
+        <p>Tarefas criadas {count} </p>
         <p>Concluídas</p>
       </div>
 
       {commentList.map((list) => {
         return <ContentList
-          onDeleteComments={deleteList}
+          onListDecrement={decrementList}
+          onDeleteList={deleteList}
           key={list}
           textList={list}
         />;
