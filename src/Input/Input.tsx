@@ -1,5 +1,5 @@
 import { PlusCircle } from "phosphor-react";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 import { ContentList } from "../ContentList/ContentList";
 
 import styles from "./Input.module.css";
@@ -7,11 +7,14 @@ import styles from "./Input.module.css";
 export function Input() {
   const [count, setCount] = useState(1);
 
-  const [commentList, setComemmtList] = useState(
+  const [commentList, setComemmtList] = useState( //container
     ['Integer urna interdum massa libero auctor neque turpis turpis semper. Duis vel sed fames integer.']
   );
 
-  const [newListText, setNewListText] = useState('');
+  const [newListText, setNewListText] = useState(''); //texto
+
+  const isNewList = newListText.length === 0;
+
 
   function handleComment(event: FormEvent) {
     event.preventDefault();
@@ -20,8 +23,13 @@ export function Input() {
     setNewListText('');
   }
 
-  function handleNewCommentsChange(event: ChangeEvent) {
+  function handleNewListChange(event) {
+    event.target.setCustomValidity('')
     setNewListText(event.target.value);
+  }
+
+  function handleNewListInvalid(event) {
+    event.target.setCustomValidity('Por favor Preencher o campo!')
   }
 
   function deleteList(toDeleteList: string) {
@@ -47,10 +55,12 @@ export function Input() {
         name="list"
         placeholder="Adicione uma nova tarefa"
         value={newListText}
-        onChange={handleNewCommentsChange}
+        onChange={handleNewListChange}
+        onInvalid={handleNewListInvalid}
+        required
       />
 
-      <button type="submit" className={styles.button}
+      <button type="submit" disabled={isNewList} className={styles.button}
         onClick={incrementList}
       >
 
@@ -60,14 +70,14 @@ export function Input() {
 
       <div className={styles.descripion}>
         <p>Tarefas criadas {count} </p>
-        <p>Concluídas</p>
+        <p>Concluídas {count} </p>
       </div>
 
       {commentList.map((list) => {
         return <ContentList
+          key={list}
           onListDecrement={decrementList}
           onDeleteList={deleteList}
-          key={list}
           textList={list}
         />;
       })}

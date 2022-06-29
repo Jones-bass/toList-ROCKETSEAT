@@ -47,6 +47,13 @@
   background-color: var(--blue);
 }
 
+
+.button[type=submit]:disabled {
+  opacity: 0.7;
+  background-color: var(--blueDark);
+  cursor: not-allowed;
+}
+
 .descripion {
   width: 745px;
   margin-top: 64px;

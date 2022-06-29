@@ -22,6 +22,7 @@
   text-align: left;
 
   border-radius: 8px;
+  background-color: var(--gray-500);
 
   margin-top: 15px;
 }
