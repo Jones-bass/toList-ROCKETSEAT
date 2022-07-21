@@ -1,5 +1,5 @@
 import { Trash } from "phosphor-react";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import styles from "./ContentList.module.css";
 
 interface ContentProps {
@@ -9,7 +9,7 @@ interface ContentProps {
 }
 
 export function ContentList({ textList, onDeleteList, onListDecrement}: ContentProps) {
-  const [termo, setTermo] = useState()
+  const [termo, setTermo] = useState('')
 
   function handleDeleteList() {
     onDeleteList(textList)
@@ -19,7 +19,7 @@ export function ContentList({ textList, onDeleteList, onListDecrement}: ContentP
     onListDecrement(textList)
   }
 
-  function handleChangeRadio(event) {
+  function handleChangeRadio(event: ChangeEvent<HTMLInputElement>) {
     setTermo(event.target.value)
   }
  
@@ -29,7 +29,7 @@ export function ContentList({ textList, onDeleteList, onListDecrement}: ContentP
         <label>
           <input 
           type="radio" 
-          name="radio"
+          value="radio"
           onChange={handleChangeRadio} 
           />
         </label>
@@ -38,6 +38,7 @@ export function ContentList({ textList, onDeleteList, onListDecrement}: ContentP
         <button onClick={handleDeleteList} title="Deletar lista">
           <Trash onClick={HandleDescrementList} size={20} />
         </button>
+
       </div>
     </div>
   );

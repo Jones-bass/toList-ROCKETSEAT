@@ -1,5 +1,5 @@
 import { PlusCircle } from "phosphor-react";
-import { FormEvent, useState } from "react";
+import { ChangeEvent, FormEvent, InvalidEvent, useState } from "react";
 import { ContentList } from "../ContentList/ContentList";
 
 import styles from "./Input.module.css";
@@ -15,7 +15,6 @@ export function Input() {
 
   const isNewList = newListText.length === 0;
 
-
   function handleComment(event: FormEvent) {
     event.preventDefault();
 
@@ -23,12 +22,12 @@ export function Input() {
     setNewListText('');
   }
 
-  function handleNewListChange(event) {
+  function handleNewListChange(event: ChangeEvent<HTMLInputElement>) {
     event.target.setCustomValidity('')
     setNewListText(event.target.value);
   }
 
-  function handleNewListInvalid(event) {
+  function handleNewListInvalid(event: InvalidEvent<HTMLInputElement>) {
     event.target.setCustomValidity('Por favor Preencher o campo!')
   }
 
