@@ -1,46 +1,43 @@
 import { Trash } from "phosphor-react";
-import { ChangeEvent, useState } from "react";
 import styles from "./ContentList.module.css";
 
-interface ContentProps {
-  textList: string;
-  onDeleteList: (comment: string)  => void;
-  onListDecrement: (comment: string)  => void
+interface taskProps {
+  id: string;
+  isComplete: boolean;
 }
 
-export function ContentList({ textList, onDeleteList, onListDecrement}: ContentProps) {
-  const [termo, setTermo] = useState('')
+interface ContentProps {
+  title: string;
+  isComplete: boolean;
+  taskList: taskProps;
+  onDeleteList: (comment: string) => void;
+  handleTaskCompletion: (comment: string) => void;
+}
 
-  function handleDeleteList() {
-    onDeleteList(textList)
-  }
-
-  function HandleDescrementList() {
-    onListDecrement(textList)
-  }
-
-  function handleChangeRadio(event: ChangeEvent<HTMLInputElement>) {
-    setTermo(event.target.value)
-  }
- 
+export function ContentList({
+  title,
+  onDeleteList,
+  taskList,
+  handleTaskCompletion,
+}: ContentProps) {
   return (
-    <div className={styles.content}>
-      <div className={styles.section}>
-        <label>
+    <>
+    <ul className={styles.content}>
+      <li className={styles.section}>
+        <div>
           <input 
-          type="radio" 
-          value="radio"
-          onChange={handleChangeRadio} 
+            defaultChecked={taskList.isComplete}
+            onClick={() => handleTaskCompletion(taskList.id)}
+            type="checkbox"
           />
-        </label>
-        <div className={styles.text}>{textList}</div>
+        </div>
+        <div className={styles.text}>{title}</div>
 
-        <button onClick={handleDeleteList} title="Deletar lista">
-          <Trash onClick={HandleDescrementList} size={20} />
+        <button onClick={() => onDeleteList(taskList.id)} type='button'>
+          <Trash className={styles.trash} size={20} />
         </button>
-
-      </div>
-    </div>
+      </li>
+    </ul>
+    </>
   );
 }
-

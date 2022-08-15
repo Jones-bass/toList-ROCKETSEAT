@@ -38,3 +38,11 @@
   color: var(--gray-300);
   cursor: pointer;
 }
+
+.trash:hover {
+  color: var(--danger)
+}
+
+input:focus {
+  box-shadow: 0 0 0 2px var(--blueDark);
+}

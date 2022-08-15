@@ -54,7 +54,7 @@
   cursor: not-allowed;
 }
 
-.descripion {
+.containerTarefa {
   width: 745px;
   margin-top: 64px;
   
@@ -64,4 +64,11 @@
   flex-wrap: wrap;
   display:inline-flex;
 }
+
+.textSpan {
+  color: var(--blueDark);
+  font-size: 1.2rem;
+}
+
+
 

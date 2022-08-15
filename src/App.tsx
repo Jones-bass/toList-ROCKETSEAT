@@ -1,19 +1,14 @@
+import { Input } from "./Input/Input";
+import { Header } from "./Header/Header";
 
-import { Input } from './Input/Input';
-import { Header } from './Header/Header';
-
-import './global.css';
-
+import "./global.css";
 
 export function App() {
-
   return (
     <div>
-      <Header/>
+      <Header />
       <Input />
- 
+  
     </div>
-  )
+  );
 }
-
-

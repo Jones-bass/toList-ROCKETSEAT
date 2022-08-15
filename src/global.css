@@ -15,7 +15,7 @@
   --blue: #4EA8DE;
   --blueDark: #1E6F9F;
 
-  --danger: #E25858;
+  --danger: #ce3636;
 }
 
 
@@ -41,3 +41,5 @@ body, input, textarea, button {
   font-weight: 400;
   font-size: 1rem;
 }
+
+
