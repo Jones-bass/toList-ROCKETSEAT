@@ -6,7 +6,9 @@
   align-items: center;
   text-align: center;
   flex-wrap: wrap;
-  display: inline-block;
+  display: flex;
+  margin: auto;
+
 }
 
 .section {
