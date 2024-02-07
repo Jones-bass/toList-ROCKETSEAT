@@ -6,6 +6,7 @@ import { ContentList } from '../components/ContentList'
 import { IconList } from '../components/IconList'
 
 import { FormContainer, ContainerTask, ButtonTask } from './styles'
+import { api } from '../services/api'
 
 export function Home() {
   const [commentList, setComemmtList] = useState([
@@ -26,19 +27,25 @@ export function Home() {
 
   const isNewList = newListText.length === 0
 
-  function handleComment(event: FormEvent) {
+  async function handleComment(event: FormEvent) {
     event.preventDefault()
 
-    setComemmtList([
-      ...commentList,
-      {
-        id: uuid(),
+    try {
+      const response = await api.post('/todo', {
+        title: newListText,
+      })
+
+      const newTask = {
+        id: response.data.id,
         title: newListText,
         isComplete: false,
-      },
-    ])
+      }
 
-    setNewListText('')
+      setComemmtList([...commentList, newTask])
+      setNewListText('')
+    } catch (error) {
+      console.error('Erro ao adicionar nova tarefa:', error)
+    }
   }
 
   function handleNewListChange(event: ChangeEvent<HTMLInputElement>) {
@@ -47,12 +54,6 @@ export function Home() {
 
   function handleNewListInvalid(event: InvalidEvent<HTMLInputElement>) {
     event.target.setCustomValidity('Por favor Preencher o campo!')
-  }
-
-  function deleteList(id: String) {
-    const deleteOnComment = commentList.filter((task) => task.id !== id)
-
-    setComemmtList(deleteOnComment)
   }
 
   function handleTaskCompletion(id: String) {
@@ -112,7 +113,7 @@ export function Home() {
             key={index}
             handleTaskCompletion={handleTaskCompletion}
             isComplete={item.isComplete}
-            onDeleteList={deleteList}
+            onDeleteList={console.log}
             taskList={item}
             title={item.title}
           />

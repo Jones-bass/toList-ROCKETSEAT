@@ -55,12 +55,13 @@ export const ButtonTask = styled.button`
 `
 export const ContainerTask = styled.div`
   width: 745px;
-  margin-top: 64px;
+  padding-top: 64px;
 
   justify-content: space-between;
   align-items: center;
 
-  display: inline-flex;
+  margin: 0 auto;
+  display: flex;
 
   .textTask {
     color: ${(props) => props.theme.blueDark};
