@@ -1,5 +1,5 @@
 import { PlusCircle } from 'phosphor-react'
-import { ChangeEvent, FormEvent, InvalidEvent, useState } from 'react'
+import { ChangeEvent, FormEvent, InvalidEvent, useState, useEffect } from 'react'
 
 import { v4 as uuid } from 'uuid'
 import { ContentList } from '../components/ContentList'
@@ -26,6 +26,20 @@ export function Home() {
   const [newListText, setNewListText] = useState('') // texto
 
   const isNewList = newListText.length === 0
+
+  useEffect(() => {
+    // Fetch data from the API when the component mounts
+    async function fetchData() {
+      try {
+        const response = await api.get('/todo') // Assuming your API endpoint for fetching data is /todo
+        setComemmtList(response.data)
+      } catch (error) {
+        console.error('Erro ao buscar dados do servidor:', error)
+      }
+    }
+
+    fetchData()
+  }, [])
 
   async function handleComment(event: FormEvent) {
     event.preventDefault()
@@ -54,6 +68,16 @@ export function Home() {
 
   function handleNewListInvalid(event: InvalidEvent<HTMLInputElement>) {
     event.target.setCustomValidity('Por favor Preencher o campo!')
+  }
+
+  async function deleteList(id: string) {
+    try {
+      await api.delete(`/todo/${id}`)
+      const updatedCommentList = await api.get('/todo')
+      setComemmtList(updatedCommentList.data)
+    } catch (error) {
+      console.error('Erro ao excluir tarefa do servidor:', error)
+    }
   }
 
   function handleTaskCompletion(id: String) {
@@ -113,7 +137,7 @@ export function Home() {
             key={index}
             handleTaskCompletion={handleTaskCompletion}
             isComplete={item.isComplete}
-            onDeleteList={console.log}
+            onDeleteList={deleteList}
             taskList={item}
             title={item.title}
           />
