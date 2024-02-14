@@ -1,17 +1,13 @@
 import { Trash } from 'phosphor-react'
 import { Checkbox } from '../Checkbox'
 import { Container, ContainerCheckbox, ContentItem } from './styles'
-
-interface taskProps {
-  id: string
-  isComplete: boolean
-}
+import { TodoProps } from '../../page'
 
 interface ContentProps {
   title: string
   isComplete: boolean
-  taskList: taskProps
-  onDeleteList: (comment: string) => void
+  taskList: TodoProps
+  onDeleteList: (id: string) => void
   handleTaskCompletion: (comment: string) => void
 }
 
@@ -26,8 +22,8 @@ export function ContentList({
       <ContentItem>
         <ContainerCheckbox>
           <Checkbox
-            defaultChecked={taskList.isComplete}
-            onClick={() => handleTaskCompletion(taskList.id)}
+            checked={taskList.isComplete}
+            onChange={() => handleTaskCompletion(taskList.id)}
           />
         </ContainerCheckbox>
         <div className="text">{title}</div>

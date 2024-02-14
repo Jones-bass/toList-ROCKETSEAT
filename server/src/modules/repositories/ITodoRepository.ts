@@ -1,4 +1,5 @@
-import { Todo } from '../entities/Todo'
+/* eslint-disable prettier/prettier */
+import { Todo } from "../entities/Todo"
 
 export interface ICreateTodoDTO {
   title: string

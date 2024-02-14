@@ -1,6 +1,6 @@
 import { inject, injectable } from 'tsyringe'
-import { ITodoRepository } from '../../dtos/ITodoRepository'
 import { Todo } from '../../entities/Todo'
+import { ITodoRepository } from '../../repositories/ITodoRepository'
 
 @injectable()
 export class DeleteTodoUseCase {

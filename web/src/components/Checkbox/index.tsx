@@ -1,15 +1,25 @@
 import { Check } from 'phosphor-react'
-import { ComponentProps } from 'react'
+import { ComponentProps, useState } from 'react'
 import { CheckboxContainer, CheckboxIndicator } from './styles'
 
 export interface CheckboxProps
-  extends ComponentProps<typeof CheckboxContainer> {}
+  extends ComponentProps<typeof CheckboxContainer> {
+  checked: boolean
+  onChange: (isChecked: boolean) => void
+}
 
-export function Checkbox(props: CheckboxProps) {
+export function Checkbox({ checked, onChange, ...props }: CheckboxProps) {
+  const [isChecked, setIsChecked] = useState(checked)
+
+  function handleChange() {
+    setIsChecked(!isChecked)
+    onChange(!isChecked)
+  }
+
   return (
-    <CheckboxContainer {...props}>
+    <CheckboxContainer {...props} onClick={handleChange}>
       <CheckboxIndicator asChild>
-        <Check weight="bold" />
+        {checked ? <Check weight="bold" /> : null}
       </CheckboxIndicator>
     </CheckboxContainer>
   )

@@ -9,4 +9,5 @@ export class ListTodoController {
     const all = await listTodoUseCase.execute()
 
     return response.json(all)
-}}
+  }
+}

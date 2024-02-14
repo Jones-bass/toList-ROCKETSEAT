@@ -1,8 +1,8 @@
 import { Repository } from 'typeorm'
 
 import { Todo } from '../entities/Todo'
-import { ICreateTodoDTO, ITodoRepository } from '../dtos/ITodoRepository'
 import { AppDataSource } from '../../data-source'
+import { ICreateTodoDTO, ITodoRepository } from './ITodoRepository'
 
 export class TodoRepository implements ITodoRepository {
   private repository: Repository<Todo>

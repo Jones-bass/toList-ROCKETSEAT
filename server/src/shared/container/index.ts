@@ -1,5 +1,5 @@
 import { container } from 'tsyringe'
-import { ITodoRepository } from '../../modules/dtos/ITodoRepository'
 import { TodoRepository } from '../../modules/repositories/TodoRepository'
+import { ITodoRepository } from '../../modules/repositories/ITodoRepository'
 
 container.registerSingleton<ITodoRepository>('TodoRepository', TodoRepository)

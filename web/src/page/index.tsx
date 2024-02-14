@@ -1,64 +1,42 @@
 import { PlusCircle } from 'phosphor-react'
-import { ChangeEvent, FormEvent, InvalidEvent, useState, useEffect } from 'react'
+import {
+  ChangeEvent,
+  FormEvent,
+  InvalidEvent,
+  useState,
+  useEffect,
+} from 'react'
 
-import { v4 as uuid } from 'uuid'
 import { ContentList } from '../components/ContentList'
 import { IconList } from '../components/IconList'
 
 import { FormContainer, ContainerTask, ButtonTask } from './styles'
 import { api } from '../services/api'
 
-export function Home() {
-  const [commentList, setComemmtList] = useState([
-    {
-      id: uuid(),
-      title: 'JavaScript',
-      isComplete: false,
-    },
+export interface TodoProps {
+  id: string
+  title: string
+  isComplete: boolean
+}
 
-    {
-      id: uuid(),
-      title: 'Estudar ReactJS',
-      isComplete: false,
-    },
-  ])
+export function Home() {
+  const [commentList, setComemmtList] = useState<TodoProps[]>([])
+  const [selectedTasks, setSelectedTasks] = useState<string[]>([])
 
   const [newListText, setNewListText] = useState('') // texto
 
   const isNewList = newListText.length === 0
 
   useEffect(() => {
-    // Fetch data from the API when the component mounts
-    async function fetchData() {
-      try {
-        const response = await api.get('/todo') // Assuming your API endpoint for fetching data is /todo
-        setComemmtList(response.data)
-      } catch (error) {
-        console.error('Erro ao buscar dados do servidor:', error)
-      }
-    }
-
-    fetchData()
+    fetchTasks()
   }, [])
 
-  async function handleComment(event: FormEvent) {
-    event.preventDefault()
-
+  async function fetchTasks() {
     try {
-      const response = await api.post('/todo', {
-        title: newListText,
-      })
-
-      const newTask = {
-        id: response.data.id,
-        title: newListText,
-        isComplete: false,
-      }
-
-      setComemmtList([...commentList, newTask])
-      setNewListText('')
+      const response = await api.get('/todo')
+      setComemmtList(response.data)
     } catch (error) {
-      console.error('Erro ao adicionar nova tarefa:', error)
+      console.error('Erro ao buscar dados do servidor:', error)
     }
   }
 
@@ -71,30 +49,41 @@ export function Home() {
   }
 
   async function deleteList(id: string) {
+    await api.delete(`/todo/${id}`)
+    const updatedCommentList = await api.get('/todo')
+    setComemmtList(updatedCommentList.data)
+  }
+
+  async function handleComment(event: FormEvent) {
+    event.preventDefault()
     try {
-      await api.delete(`/todo/${id}`)
-      const updatedCommentList = await api.get('/todo')
-      setComemmtList(updatedCommentList.data)
+      await api.post('/todo', { title: newListText })
+      setNewListText('')
+      fetchTasks()
     } catch (error) {
-      console.error('Erro ao excluir tarefa do servidor:', error)
+      console.error('Erro ao adicionar tarefa:', error)
     }
   }
 
-  function handleTaskCompletion(id: String) {
-    const taskList = commentList.map((task) => {
+  async function handleTaskCompletion(id: string) {
+    const updatedCommentList = commentList.map((task) => {
       if (task.id === id) {
-        task.isComplete = !task.isComplete
+        return { ...task, isComplete: !task.isComplete }
       }
-
       return task
     })
 
-    setComemmtList(taskList)
+    setComemmtList(updatedCommentList)
+
+    // Adicionar ou remover o ID da tarefa selecionada do estado
+    if (selectedTasks.includes(id)) {
+      setSelectedTasks(selectedTasks.filter((taskId) => taskId !== id))
+    } else {
+      setSelectedTasks([...selectedTasks, id])
+    }
   }
 
-  const concluded = commentList.filter((task) => {
-    return task.isComplete !== false
-  })
+  const concluded = commentList.filter((task) => task.isComplete)
 
   return (
     <FormContainer onSubmit={handleComment}>
